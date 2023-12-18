@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Roller in Paradise</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom, #87CEEB, #5F9EA0);
+      font-family: 'Arial', sans-serif;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      font-size: 24px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    @keyframes rollAnimation {
+      0% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-50px) rotate(-180deg); }
+      50% { transform: translateY(0) rotate(-360deg); }
+      75% { transform: translateY(-25px) rotate(-540deg); }
+      100% { transform: translateY(0) rotate(-720deg); }
+    }
+
+    #dice {
+      width: 100px;
+      height: 100px;
+      background-color: white;
+      border: 2px solid #333;
+      border-radius: 12px;
+      margin: 40px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to Dice Roller in Paradise</h1>
+  
+  <button onclick="rollDice()">Roll d20</button>
+  
+  <div id="dice"></div>
+
+  <p id="result"></p>
+
+  <script>
+    function rollDice() {
+      const diceElement = document.getElementById('dice');
+      const resultElement = document.getElementById('result');
+
+      // Clear previous results
+      diceElement.innerHTML = '';
+      resultElement.innerHTML = '';
+
+      // Introduce a delay before rolling
+      setTimeout(() => {
+        // Generate a random number between 1 and 20
+        const result = Math.floor(Math.random() * 20) + 1;
+
+        // Display the rolling animation for the single die
+        diceElement.style.animation = 'none';
+        void diceElement.offsetWidth; // Trigger reflow
+        diceElement.style.animation = 'rollAnimation 1s ease-out';
+
+        // Display the result after the rolling animation completes
+        setTimeout(() => {
+          diceElement.innerText = result;
+          resultElement.innerText = `You rolled: ${result}`;
+        }, 1000); // Wait for the rolling animation to complete
+      }, 1500); // Introduce a delay before rolling
+    }
+  </script>
+
+</body>
+</html>
